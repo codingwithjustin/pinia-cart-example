@@ -1,27 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <div class="container">
+    <Card>
+      <h4>Add new item</h4>
+      <!-- Create new item -->
+      <AddItem />
+    </Card>
+    <Card>
+      <h4>Your items ({{ cart.itemsCount }})</h4>
+      <ItemsList />
+    </Card>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
+import { defineComponent } from 'vue'
+import Card from '@/components/Card.vue'
+import AddItem from '@/components/AddItem.vue'
+import ItemsList from '@/components/ItemsList.vue'
+import { useCartStore } from '@/store/cart'
 
 export default defineComponent({
-  name: "App",
-  components: {
-    HelloWorld
+  components: { Card, AddItem, ItemsList },
+  setup() {
+    const cart = useCartStore()
+    return { cart }
   }
-});
+})
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
